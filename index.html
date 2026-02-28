@@ -14,23 +14,28 @@
     </style>
     <link rel="stylesheet" href="./css/math.css">
     <style>
-/* MARQUEE */
-@keyframes marquee {
-  0%   { transform: translateX(100%); }
-  100% { transform: translateX(-100%); }
-}
+        /* MARQUEE */
+        @keyframes marquee {
+            0% {
+                transform: translateX(100%);
+            }
 
-.animate-marquee {
-  display: inline-block;
-  white-space: nowrap;
-  animation: marquee 12s linear infinite;
-}
+            100% {
+                transform: translateX(-100%);
+            }
+        }
 
-.marquee-wrapper {
-  overflow: hidden;
-  width: 100%;
-}
-</style>
+        .animate-marquee {
+            display: inline-block;
+            white-space: nowrap;
+            animation: marquee 12s linear infinite;
+        }
+
+        .marquee-wrapper {
+            overflow: hidden;
+            width: 100%;
+        }
+    </style>
 </head>
 
 <body class="font-['Roboto',sans-serif] bg-amber-100">
@@ -66,8 +71,8 @@
                             as the <em>Caesar Cipher</em>."
                         </p>
                         <p>
-                            <b>Source:</b> <a class=" text-yellow-600" href="https://caesarcipher.net/"
-                                target="_blank" rel="noopener noreferrer">caesarcipher.net</a>
+                            <b>Source:</b> <a class=" text-yellow-600" href="https://caesarcipher.net/" target="_blank"
+                                rel="noopener noreferrer">caesarcipher.net</a>
                         </p>
                     </section>
                     <div class="flex flex-col gap-[10px] justify-center items-center mt-[30px]">
@@ -118,7 +123,8 @@
                     </ol>
 
                     <p>So, the ciphertext of the message <code>UNGSEREYSOPEA</code> using Caesar cipher with shift
-                        <code>k = 3</code> is:</p>
+                        <code>k = 3</code> is:
+                    </p>
                     <p><strong>E<sub>k=3</sub> (UNGSEREYSOPEA) = <span
                                 class="text-yellow-600">XQJVHUHBVRSHD</span></strong></p>
                     <p>To decrypt the message, we simply reverse the process by subtracting 3 from each number and
@@ -333,13 +339,11 @@
                 <br>
             </div>
             <h2 id="content-3" class="font-bold text-2xl "></h2>
-            <div class="h-auto p-[30px]">
-                <p> <a class="underline text-yellow-600"
-                        href="https://github.com/Sereysopea-Ung/ite-year-2-cipher.git"></a></p>
-            </div>
+
         </div>
         <div class="h-full p-[100px] hidden md:block md:col-span-2 lg:col-span-2 ">
-            <div id="content" class="h-[320px] w-full bg-gray-200 relative shadow-xl rounded-xl" style="font-family: sticker;">
+            <div id="content" class="h-[320px] w-full bg-gray-200 relative shadow-xl rounded-xl"
+                style="font-family: sticker;">
                 <h2 class="text-center pt-[20px] text-3xl">Content</h2>
                 <div class="ml-[50px] mt-[20px] text-2xl text-[#555]">
                     <a href="#content-1" id="menu-1">
@@ -362,7 +366,7 @@
                     <a href="#content-2" id="menu-2">
                         <p class="hover:text-blue-700  hover:cursor-pointer">2. RSA Cryptography</p>
                     </a>
-                    
+
                 </div>
             </div>
         </div>
