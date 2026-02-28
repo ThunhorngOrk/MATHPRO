@@ -1,3 +1,21 @@
+/* 🔹 MARQUEE ANIMATION */
+@keyframes marquee {
+  0%   { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
+
+.animate-marquee {
+  display: inline-block;        /* ✅ important */
+  white-space: nowrap;          /* ✅ keep text in one line */
+  animation: marquee 12s linear infinite;
+}
+
+/* 🔹 MARQUEE CONTAINER */
+.marquee-wrapper {
+  overflow: hidden;             /* ✅ hide extra text */
+  width: 100%;
+}
+
 .iframe-container{
     position: relative;
     width: 100%;
