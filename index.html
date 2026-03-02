@@ -1,0 +1,994 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cryptography Lab | Encryption & Decryption Demo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="./CSS/math.css">
+    <style  >
+       
+    </style>
+</head>
+<body class="min-h-screen p-6">
+    <!-- Header Section -->
+    <div class="max-w-7xl mx-auto mb-8">
+        <div class="glass-card p-8 text-white" style="background: linear-gradient(135deg, rgba(102,126,234,0.95) 0%, rgba(118,75,162,0.95) 100%);">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <i class="fas fa-shield-halbed text-5xl floating"></i>
+                    <div>
+                        <h1 class="text-4xl font-bold mb-2">  <img src="./IMAGES/logo3.png" alt="">Cryptography Lab</h1>
+                        <p class="text-lg opacity-90">Encryption & Decryption Demonstration</p>
+                    </div>
+                </div>
+                <div class="text-right">
+                    <p class="text-sm opacity-75">Submitted to</p>
+                    <p class="text-xl font-semibold">Mr. LIM Seyha</p>
+                    <p class="text-sm opacity-75">Royal University of Phnom Penh</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content Grid -->
+    <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-4 gap-6">
+        <!-- Left Sidebar Navigation -->
+        <div class="lg:col-span-1">
+            <div class="glass-card p-6 sticky top-6">
+                <h2 class="text-xl font-bold text-gray-800 mb-6 flex items-center">
+                    <i class="fas fa-list-ul mr-3 text-indigo-600"></i>
+                    Contents
+                </h2>
+                <nav class="space-y-2">
+                    <a href="#classical" class="nav-link block px-4 py-2 text-gray-700 hover:text-indigo-600">
+                        <i class="fas fa-scroll mr-2 text-indigo-500"></i>
+                        I. Classical Cryptography
+                    </a>
+                    <div class="ml-6 space-y-1">
+                        <a href="#caesar" class="nav-link block px-4 py-1 text-sm text-gray-600 hover:text-indigo-600">
+                            <i class="fas fa-arrow-right mr-2 text-xs"></i>
+                            1.1 Caesar Cipher
+                        </a>
+                        <a href="#shift" class="nav-link block px-4 py-1 text-sm text-gray-600 hover:text-indigo-600">
+                            <i class="fas fa-arrow-right mr-2 text-xs"></i>
+                            1.2 General Shift Cipher
+                        </a>
+                        <a href="#affine" class="nav-link block px-4 py-1 text-sm text-gray-600 hover:text-indigo-600">
+                            <i class="fas fa-arrow-right mr-2 text-xs"></i>
+                            1.3 Affine Cipher
+                        </a>
+                        <a href="#transposition" class="nav-link block px-4 py-1 text-sm text-gray-600 hover:text-indigo-600">
+                            <i class="fas fa-arrow-right mr-2 text-xs"></i>
+                            1.4 Transposition Cipher
+                        </a>
+                    </div>
+                    <a href="#rsa" class="nav-link block px-4 py-2 text-gray-700 hover:text-indigo-600">
+                        <i class="fas fa-lock mr-2 text-indigo-500"></i>
+                        II. RSA Cryptography
+                    </a>
+                </nav>
+            </div>
+        </div>
+
+        <!-- Right Content Area -->
+        <div class="lg:col-span-3 space-y-8">
+            <!-- Classical Cryptography Section -->
+            <div id="classical" class="cipher-section p-8">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                    <span class="bg-indigo-600 text-white w-8 h-8 rounded-full flex items-center justify-center mr-3">I</span>
+                    Classical Cryptography
+                       
+                </h2>
+                  
+                <!-- Caesar Cipher -->
+                <div id="caesar" class="mb-12 p-6 bg-gray-50 rounded-xl">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                        <span class="bg-indigo-100 text-indigo-600 w-6 h-6 rounded-full flex items-center justify-center text-sm mr-2">1.1</span>
+                        Caesar Cipher
+                    </h3>
+                    <p class="text-gray-600 mb-6 italic border-l-4 border-indigo-300 pl-4">
+                        "One of the earliest and most well-known forms of cryptography - shift each letter by 3 positions."
+                    </p>
+                     <div  class="flex w-full justify-center  items-center "> 
+                              <img    src="./images/logomath-removebg-preview.png" alt="Math logo"  class="w-200  md:w-64">
+                        </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">
+                                <i class="fas fa-font mr-2 text-indigo-500"></i>Enter Text
+                            </label>
+                            <input type="text" id="caesar-input" value="hello" 
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                        </div>
+                        <div class="flex items-end space-x-3">
+                            <button id="caesar-encrypt-btn" 
+                                class="gradient-btn text-white px-6 py-3 rounded-lg flex items-center">
+                                <i class="fas fa-lock mr-2"></i>Encrypt
+                            </button>
+                            <button id="caesar-decrypt-btn" 
+                                class="bg-gray-200 text-gray-700 hover:bg-gray-300 px-6 py-3 rounded-lg flex items-center transition">
+                                <i class="fas fa-unlock mr-2"></i>Decrypt
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-6">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">
+                            <i class="fas fa-check-circle mr-2 text-green-500"></i>Result
+                        </label>
+                        <div id="caesar-result" class="result-box p-4 font-mono text-lg">
+                            No Result
+                        </div>
+                    </div>
+                </div>
+
+                <!-- General Shift Cipher -->
+                <div id="shift" class="mb-12 p-6 bg-gray-50 rounded-xl">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                        <span class="bg-indigo-100 text-indigo-600 w-6 h-6 rounded-full flex items-center justify-center text-sm mr-2">1.2</span>
+                        General Shift Cipher
+                    </h3>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="md:col-span-2">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">
+                                <i class="fas fa-font mr-2 text-indigo-500"></i>Enter Text
+                            </label>
+                            <input type="text" id="shift-input" value="hello" 
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">
+                                <i class="fas fa-key mr-2 text-indigo-500"></i>Key (Shift)
+                            </label>
+                            <input type="number" id="shift-key" value="5" 
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
+                        </div>
+                    </div>
+                    
+                    <div class="flex flex-wrap gap-3 mt-6">
+                        <button id="shift-encrypt-btn" 
+                            class="gradient-btn text-white px-6 py-3 rounded-lg flex items-center">
+                            <i class="fas fa-lock mr-2"></i>Encrypt
+                        </button>
+                        <button id="shift-decrypt-btn" 
+                            class="bg-gray-200 text-gray-700 hover:bg-gray-300 px-6 py-3 rounded-lg flex items-center transition">
+                            <i class="fas fa-unlock mr-2"></i>Decrypt
+                        </button>
+                        <button id="shift-brute-force-btn" 
+                            class="bg-purple-100 text-purple-700 hover:bg-purple-200 px-6 py-3 rounded-lg flex items-center transition">
+                            <i class="fas fa-bolt mr-2"></i>Brute Force
+                        </button>
+                    </div>
+                    
+                    <div class="mt-6">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Result</label>
+                        <div id="shift-result" class="result-box p-4 font-mono text-lg">
+                            No Result
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Affine Cipher -->
+                <div id="affine" class="mb-12 p-6 bg-gray-50 rounded-xl">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                        <span class="bg-indigo-100 text-indigo-600 w-6 h-6 rounded-full flex items-center justify-center text-sm mr-2">1.3</span>
+                        Affine Cipher
+                    </h3>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                        <div class="md:col-span-2">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Text</label>
+                            <input type="text" id="affine-input" value="hello" 
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Key a</label>
+                            <input type="number" id="affine-key-a" value="5" 
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Key b</label>
+                            <input type="number" id="affine-key-b" value="8" 
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg">
+                        </div>
+                    </div>
+                    
+                    <div class="flex flex-wrap gap-3 mt-6">
+                        <button id="affine-encrypt-btn" 
+                            class="gradient-btn text-white px-6 py-3 rounded-lg flex items-center">
+                            <i class="fas fa-lock mr-2"></i>Encrypt
+                        </button>
+                        <button id="affine-decrypt-btn" 
+                            class="bg-gray-200 text-gray-700 hover:bg-gray-300 px-6 py-3 rounded-lg flex items-center">
+                            <i class="fas fa-unlock mr-2"></i>Decrypt
+                        </button>
+                        <button id="affine-brute-force-btn" 
+                            class="bg-purple-100 text-purple-700 hover:bg-purple-200 px-6 py-3 rounded-lg flex items-center">
+                            <i class="fas fa-bolt mr-2"></i>Brute Force
+                        </button>
+                    </div>
+                    
+                    <div class="mt-6">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Result</label>
+                        <div id="affine-result" class="result-box p-4 font-mono text-lg">
+                            No Result
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Transposition Cipher -->
+                <div id="transposition" class="mb-12 p-6 bg-gray-50 rounded-xl">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                        <span class="bg-indigo-100 text-indigo-600 w-6 h-6 rounded-full flex items-center justify-center text-sm mr-2">1.4</span>
+                        Transposition Cipher
+                    </h3>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="md:col-span-2">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Text</label>
+                            <input type="text" id="transposition-input" value="TRANSPOSITION" 
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Key</label>
+                            <input type="text" id="transposition-key" value="4312567" 
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg">
+                        </div>
+                    </div>
+                    
+                    <div class="flex gap-3 mt-6">
+                        <button id="transposition-encrypt-btn" 
+                            class="gradient-btn text-white px-6 py-3 rounded-lg flex items-center">
+                            <i class="fas fa-lock mr-2"></i>Encrypt
+                        </button>
+                        <button id="transposition-decrypt-btn" 
+                            class="bg-gray-200 text-gray-700 hover:bg-gray-300 px-6 py-3 rounded-lg flex items-center">
+                            <i class="fas fa-unlock mr-2"></i>Decrypt
+                        </button>
+                    </div>
+                    
+                    <div class="mt-6">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Result</label>
+                        <div id="transposition-result" class="result-box p-4 font-mono text-lg">
+                            No Result
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RSA Section -->
+            <div id="rsa" class="cipher-section p-8">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                    <span class="bg-indigo-600 text-white w-8 h-8 rounded-full flex items-center justify-center mr-3">II</span>
+                    RSA Cryptography
+                </h2>
+
+                <!-- Key Generation -->
+                <div class="mb-12 p-6 bg-gray-50 rounded-xl">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Key Generation</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Prime p</label>
+                            <input type="number" id="rsa-keygen-p" value="61" 
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Prime q</label>
+                            <input type="number" id="rsa-keygen-q" value="53" 
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg">
+                        </div>
+                    </div>
+                    <button id="rsa-keygen-btn" 
+                        class="gradient-btn text-white px-6 py-3 rounded-lg mt-4 flex items-center">
+                        <i class="fas fa-key mr-2"></i>Generate Keys
+                    </button>
+                    <div class="mt-6">
+                        <div id="rsa-keygen-result" class="result-box p-4 font-mono text-sm">
+                            No Result
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RSA Encryption -->
+                <div class="mb-12 p-6 bg-gray-50 rounded-xl">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">RSA Encryption</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="md:col-span-3">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Plaintext</label>
+                            <input type="text" id="rsa-encrypt-input" value="HELLO" 
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Public Key (e)</label>
+                            <input type="number" id="rsa-encrypt-key-e" value="17" 
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Modulus (n)</label>
+                            <input type="number" id="rsa-encrypt-key-n" value="3233" 
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg">
+                        </div>
+                    </div>
+                    <button id="rsa-encrypt-btn" 
+                        class="gradient-btn text-white px-6 py-3 rounded-lg mt-4 flex items-center">
+                        <i class="fas fa-lock mr-2"></i>Encrypt
+                    </button>
+                    <div class="mt-6">
+                        <div id="rsa-encrypt-result" class="result-box p-4 font-mono">
+                            No Result
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RSA Decryption -->
+                <div class="p-6 bg-gray-50 rounded-xl">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">RSA Decryption</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="md:col-span-3">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Ciphertext (comma-separated)</label>
+                            <input type="text" id="rsa-decrypt-input" value="123,456,789" 
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Private Key (d)</label>
+                            <input type="number" id="rsa-decrypt-key-d" value="2753" 
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Modulus (n)</label>
+                            <input type="number" id="rsa-decrypt-key-n" value="3233" 
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg">
+                        </div>
+                    </div>
+                    <button id="rsa-decrypt-btn" 
+                        class="gradient-btn text-white px-6 py-3 rounded-lg mt-4 flex items-center">
+                        <i class="fas fa-unlock mr-2"></i>Decrypt
+                    </button>
+                    <div class="mt-6">
+                        <div id="rsa-decrypt-result" class="result-box p-4 font-mono">
+                            No Result
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+
+        
+  // ============ UTILITY FUNCTIONS ============
+        function cleanText(text) {
+            return text.toString().toUpperCase().replace(/[^A-Z]/g, '');
+        }
+
+        // ============ CAESAR / SHIFT CIPHER FUNCTIONS ============
+        function shift_cipher_encryption(text, shift) {
+            if (!text) return '';
+            shift = parseInt(shift) % 26;
+            if (isNaN(shift)) shift = 0;
+            
+            return text.toString().toUpperCase().split('').map(char => {
+                if (char.match(/[A-Z]/)) {
+                    let code = char.charCodeAt(0);
+                    let shifted = ((code - 65 + shift) % 26 + 26) % 26 + 65;
+                    return String.fromCharCode(shifted);
+                }
+                return char;
+            }).join('');
+        }
+
+        function shift_cipher_decryption(text, shift) {
+            return shift_cipher_encryption(text, 26 - (parseInt(shift) % 26));
+        }
+
+        function caesar_brute_force_decrypt(ciphertext) {
+            let results = [];
+            for (let shift = 1; shift <= 25; shift++) {
+                results.push({
+                    shift: shift,
+                    plaintext: shift_cipher_decryption(ciphertext, shift)
+                });
+            }
+            return results;
+        }
+
+        // ============ AFFINE CIPHER FUNCTIONS ============
+        function modInverse(a, m) {
+            a = ((a % m) + m) % m;
+            for (let x = 1; x < m; x++) {
+                if ((a * x) % m === 1) return x;
+            }
+            return 1;
+        }
+
+        function isCoprime(a, m) {
+            a = Math.abs(a);
+            let b = m;
+            while (b) {
+                let t = b;
+                b = a % b;
+                a = t;
+            }
+            return a === 1;
+        }
+
+        function affineCipherEncrypt(text, a, b) {
+            if (!text) return '';
+            a = parseInt(a);
+            b = parseInt(b);
+            
+            if (isNaN(a) || isNaN(b)) return 'Invalid keys';
+            if (!isCoprime(a, 26)) return 'Key a must be coprime to 26';
+            
+            a = ((a % 26) + 26) % 26;
+            b = ((b % 26) + 26) % 26;
+            
+            return text.toString().toUpperCase().split('').map(char => {
+                if (char.match(/[A-Z]/)) {
+                    let x = char.charCodeAt(0) - 65;
+                    let encrypted = (a * x + b) % 26;
+                    return String.fromCharCode(encrypted + 65);
+                }
+                return char;
+            }).join('');
+        }
+
+        function affineCipherDecrypt(text, a, b) {
+            if (!text) return '';
+            a = parseInt(a);
+            b = parseInt(b);
+            
+            if (isNaN(a) || isNaN(b)) return 'Invalid keys';
+            if (!isCoprime(a, 26)) return 'Key a must be coprime to 26';
+            
+            a = ((a % 26) + 26) % 26;
+            b = ((b % 26) + 26) % 26;
+            
+            let a_inv = modInverse(a, 26);
+            
+            return text.toString().toUpperCase().split('').map(char => {
+                if (char.match(/[A-Z]/)) {
+                    let y = char.charCodeAt(0) - 65;
+                    let decrypted = (a_inv * ((y - b + 26) % 26)) % 26;
+                    return String.fromCharCode(decrypted + 65);
+                }
+                return char;
+            }).join('');
+        }
+
+        function affine_brute_force_decrypt(ciphertext) {
+            let results = [];
+            const possibleA = [1, 3, 5, 7, 9, 11, 15, 17, 19, 21, 23, 25];
+            
+            for (let a of possibleA) {
+                for (let b = 0; b < 26; b++) {
+                    try {
+                        let plaintext = affineCipherDecrypt(ciphertext, a, b);
+                        if (plaintext && !plaintext.includes('Invalid')) {
+                            results.push({ a, b, plaintext });
+                        }
+                    } catch (e) {}
+                }
+            }
+            return results;
+        }
+
+        // ============ TRANSPOSITION CIPHER FUNCTIONS ============
+        function transpositionCipherEncrypt(text, key) {
+            if (!text || !key) return '';
+            
+            text = text.toString().replace(/\s+/g, '').toUpperCase();
+            key = key.toString();
+            
+            let cols = key.length;
+            let rows = Math.ceil(text.length / cols);
+            
+            let grid = [];
+            let charIndex = 0;
+            for (let i = 0; i < rows; i++) {
+                grid[i] = [];
+                for (let j = 0; j < cols; j++) {
+                    if (charIndex < text.length) {
+                        grid[i][j] = text[charIndex];
+                    } else {
+                        grid[i][j] = 'X';
+                    }
+                    charIndex++;
+                }
+            }
+            
+            let keyOrder = key.split('').map((char, index) => ({ 
+                char: parseInt(char) || index, 
+                index 
+            })).sort((a, b) => a.char - b.char);
+            
+            let result = '';
+            for (let item of keyOrder) {
+                let col = item.index;
+                for (let row = 0; row < rows; row++) {
+                    result += grid[row][col];
+                }
+            }
+            
+            return result;
+        }
+
+        function transpositionCipherDecrypt(text, key) {
+            if (!text || !key) return '';
+            
+            text = text.toString().toUpperCase();
+            key = key.toString();
+            
+            let cols = key.length;
+            let rows = Math.ceil(text.length / cols);
+            
+            let keyOrder = key.split('').map((char, index) => ({ 
+                char: parseInt(char) || index, 
+                originalIndex: index 
+            })).sort((a, b) => a.char - b.char);
+            
+            let totalChars = text.length;
+            let baseRows = Math.floor(totalChars / cols);
+            let extraCols = totalChars % cols;
+            
+            let colLengths = new Array(cols).fill(baseRows);
+            for (let i = 0; i < extraCols; i++) {
+                colLengths[i]++;
+            }
+            
+            let grid = Array(rows).fill().map(() => Array(cols).fill(''));
+            
+            let pos = 0;
+            for (let i = 0; i < keyOrder.length; i++) {
+                let col = keyOrder[i].originalIndex;
+                for (let row = 0; row < colLengths[i]; row++) {
+                    if (pos < text.length) {
+                        grid[row][col] = text[pos++];
+                    }
+                }
+            }
+            
+            let result = '';
+            for (let row = 0; row < rows; row++) {
+                for (let col = 0; col < cols; col++) {
+                    result += grid[row][col];
+                }
+            }
+            
+            return result.replace(/X+$/, '');
+        }
+
+        // ============ RSA FUNCTIONS ============
+        function gcd(a, b) {
+            while (b !== 0) {
+                let t = b;
+                b = a % b;
+                a = t;
+            }
+            return a;
+        }
+
+        function modInverseBigInt(e, phi) {
+            let m0 = phi;
+            let y = 0;
+            let x = 1;
+            
+            if (phi === 1) return 0;
+            
+            while (e > 1) {
+                let q = Math.floor(e / phi);
+                let t = phi;
+                
+                phi = e % phi;
+                e = t;
+                t = y;
+                
+                y = x - q * y;
+                x = t;
+            }
+            
+            if (x < 0) x += m0;
+            
+            return x;
+        }
+
+        function generateRSAKeys(p, q) {
+            p = parseInt(p);
+            q = parseInt(q);
+            
+            let n = p * q;
+            let phi = (p - 1) * (q - 1);
+            
+            let e = 65537;
+            
+            while (gcd(e, phi) !== 1) {
+                e += 2;
+            }
+            
+            let d = modInverseBigInt(e, phi);
+            
+            return {
+                n: n.toString(),
+                e: e.toString(),
+                d: d.toString()
+            };
+        }
+
+        function rsaEncrypt(message, publicKey) {
+            let { e, n } = publicKey;
+            e = parseInt(e);
+            n = parseInt(n);
+            
+            return message.toString().split('').map(char => {
+                let m = char.charCodeAt(0);
+                let result = 1;
+                for (let i = 0; i < e; i++) {
+                    result = (result * m) % n;
+                }
+                return result.toString();
+            }).join(',');
+        }
+
+        function rsaDecrypt(encryptedMessage, privateKey) {
+            let { d, n } = privateKey;
+            d = parseInt(d);
+            n = parseInt(n);
+            
+            return encryptedMessage.toString().split(',').map(numStr => {
+                if (!numStr.trim()) return '';
+                let c = parseInt(numStr.trim());
+                let result = 1;
+                for (let i = 0; i < d; i++) {
+                    result = (result * c) % n;
+                }
+                return String.fromCharCode(result);
+            }).join('');
+        }
+
+        // ============ EVENT LISTENERS ============
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM loaded - setting up event listeners');
+            
+            // Caesar Cipher
+            const caesarEncryptBtn = document.getElementById('caesar-encrypt-btn');
+            const caesarDecryptBtn = document.getElementById('caesar-decrypt-btn');
+            const caesarInput = document.getElementById('caesar-input');
+            const caesarResult = document.getElementById('caesar-result');
+
+            if (caesarEncryptBtn) {
+                caesarEncryptBtn.addEventListener('click', function() {
+                    const text = caesarInput.value;
+                    if (!text) {
+                        caesarResult.textContent = 'Please enter some text';
+                        return;
+                    }
+                    const encrypted = shift_cipher_encryption(text, 3);
+                    caesarResult.textContent = encrypted;
+                });
+            }
+
+            if (caesarDecryptBtn) {
+                caesarDecryptBtn.addEventListener('click', function() {
+                    const text = caesarInput.value;
+                    if (!text) {
+                        caesarResult.textContent = 'Please enter some text';
+                        return;
+                    }
+                    const decrypted = shift_cipher_decryption(text, 3);
+                    caesarResult.textContent = decrypted;
+                });
+            }
+
+            // Shift Cipher
+            const shiftEncryptBtn = document.getElementById('shift-encrypt-btn');
+            const shiftDecryptBtn = document.getElementById('shift-decrypt-btn');
+            const shiftBruteForceBtn = document.getElementById('shift-brute-force-btn');
+            const shiftInput = document.getElementById('shift-input');
+            const shiftKey = document.getElementById('shift-key');
+            const shiftResult = document.getElementById('shift-result');
+
+            if (shiftEncryptBtn) {
+                shiftEncryptBtn.addEventListener('click', function() {
+                    const text = shiftInput.value;
+                    const key = shiftKey.value;
+                    
+                    if (!text) {
+                        shiftResult.textContent = 'Please enter some text';
+                        return;
+                    }
+                    if (!key) {
+                        shiftResult.textContent = 'Please enter a key';
+                        return;
+                    }
+                    
+                    const encrypted = shift_cipher_encryption(text, key);
+                    shiftResult.textContent = encrypted;
+                });
+            }
+
+            if (shiftDecryptBtn) {
+                shiftDecryptBtn.addEventListener('click', function() {
+                    const text = shiftInput.value;
+                    const key = shiftKey.value;
+                    
+                    if (!text) {
+                        shiftResult.textContent = 'Please enter some text';
+                        return;
+                    }
+                    if (!key) {
+                        shiftResult.textContent = 'Please enter a key';
+                        return;
+                    }
+                    
+                    const decrypted = shift_cipher_decryption(text, key);
+                    shiftResult.textContent = decrypted;
+                });
+            }
+
+            if (shiftBruteForceBtn) {
+                shiftBruteForceBtn.addEventListener('click', function() {
+                    const text = shiftInput.value;
+                    
+                    if (!text) {
+                        shiftResult.textContent = 'Please enter some text';
+                        return;
+                    }
+                    
+                    const results = caesar_brute_force_decrypt(text);
+                    let resultText = '';
+                    for (let i = 0; i < results.length; i++) {
+                        resultText += `Shift ${results[i].shift}: ${results[i].plaintext}\n`;
+                    }
+                    shiftResult.textContent = resultText;
+                    shiftResult.style.whiteSpace = 'pre-line';
+                });
+            }
+
+           // Affine Cipher Event Listeners
+const affineEncryptBtn = document.getElementById('affine-encrypt-btn');
+const affineDecryptBtn = document.getElementById('affine-decrypt-btn');
+const affineBruteForceBtn = document.getElementById('affine-brute-force-btn');
+const affineInput = document.getElementById('affine-input');
+const affineKeyA = document.getElementById('affine-key-a');
+const affineKeyB = document.getElementById('affine-key-b');
+const affineResult = document.getElementById('affine-result');
+
+if (affineEncryptBtn) {
+    affineEncryptBtn.addEventListener('click', function() {
+        console.log('Affine encrypt clicked');
+        const text = affineInput.value;
+        const keyA = affineKeyA.value;
+        const keyB = affineKeyB.value;
+        
+        if (!text) {
+            affineResult.textContent = 'Please enter some text';
+            return;
+        }
+        if (!keyA || !keyB) {
+            affineResult.textContent = 'Please enter both keys a and b';
+            return;
+        }
+        
+        const encrypted = affineCipherEncrypt(text, keyA, keyB);
+        affineResult.textContent = encrypted;
+    });
+}
+
+if (affineDecryptBtn) {
+    affineDecryptBtn.addEventListener('click', function() {
+        console.log('Affine decrypt clicked');
+        const text = affineInput.value;
+        const keyA = affineKeyA.value;
+        const keyB = affineKeyB.value;
+        
+        if (!text) {
+            affineResult.textContent = 'Please enter some text';
+            return;
+        }
+        if (!keyA || !keyB) {
+            affineResult.textContent = 'Please enter both keys a and b';
+            return;
+        }
+        
+        const decrypted = affineCipherDecrypt(text, keyA, keyB);
+        affineResult.textContent = decrypted;
+    });
+}
+
+if (affineBruteForceBtn) {
+    affineBruteForceBtn.addEventListener('click', function() {
+        console.log('Affine brute force clicked');
+        const text = affineInput.value;
+        
+        if (!text) {
+            affineResult.textContent = 'Please enter some text';
+            return;
+        }
+        
+        const results = affine_brute_force_decrypt(text);
+        let resultText = 'Brute Force Results (first 10):\n';
+        for (let i = 0; i < Math.min(10, results.length); i++) {
+            resultText += `a=${results[i].a}, b=${results[i].b}: ${results[i].plaintext}\n`;
+        }
+        affineResult.textContent = resultText;
+        affineResult.style.whiteSpace = 'pre-line';
+    });
+}
+
+// Transposition Cipher Event Listeners
+const transpositionEncryptBtn = document.getElementById('transposition-encrypt-btn');
+const transpositionDecryptBtn = document.getElementById('transposition-decrypt-btn');
+const transpositionInput = document.getElementById('transposition-input');
+const transpositionKey = document.getElementById('transposition-key');
+const transpositionResult = document.getElementById('transposition-result');
+
+if (transpositionEncryptBtn) {
+    transpositionEncryptBtn.addEventListener('click', function() {
+        console.log('Transposition encrypt clicked');
+        const text = transpositionInput.value;
+        const key = transpositionKey.value;
+        
+        if (!text) {
+            transpositionResult.textContent = 'Please enter some text';
+            return;
+        }
+        if (!key) {
+            transpositionResult.textContent = 'Please enter a key';
+            return;
+        }
+        
+        const encrypted = transpositionCipherEncrypt(text, key);
+        transpositionResult.textContent = encrypted;
+    });
+}
+
+if (transpositionDecryptBtn) {
+    transpositionDecryptBtn.addEventListener('click', function() {
+        console.log('Transposition decrypt clicked');
+        const text = transpositionInput.value;
+        const key = transpositionKey.value;
+        
+        if (!text) {
+            transpositionResult.textContent = 'Please enter some text';
+            return;
+        }
+        if (!key) {
+            transpositionResult.textContent = 'Please enter a key';
+            return;
+        }
+        
+        const decrypted = transpositionCipherDecrypt(text, key);
+        transpositionResult.textContent = decrypted;
+    });
+}
+
+// RSA Key Generation
+const rsaKeygenBtn = document.getElementById('rsa-keygen-btn');
+const rsaKeygenP = document.getElementById('rsa-keygen-p');
+const rsaKeygenQ = document.getElementById('rsa-keygen-q');
+const rsaKeygenResult = document.getElementById('rsa-keygen-result');
+
+if (rsaKeygenBtn) {
+    rsaKeygenBtn.addEventListener('click', function() {
+        console.log('RSA keygen clicked');
+        const p = rsaKeygenP.value;
+        const q = rsaKeygenQ.value;
+        
+        if (!p || !q) {
+            rsaKeygenResult.textContent = 'Please enter both prime numbers';
+            return;
+        }
+        
+        if (parseInt(p) < 2 || parseInt(q) < 2) {
+            rsaKeygenResult.textContent = 'Prime numbers must be greater than 1';
+            return;
+        }
+        
+        const keys = generateRSAKeys(p, q);
+        rsaKeygenResult.innerHTML = `
+            <div class="text-green-600 font-bold mb-2">✅ Keys Generated Successfully!</div>
+            <div><span class="font-semibold">Public Key (e, n):</span> (${keys.e}, ${keys.n})</div>
+            <div><span class="font-semibold">Private Key (d, n):</span> (${keys.d}, ${keys.n})</div>
+        `;
+    });
+}
+
+// RSA Encryption
+const rsaEncryptBtn = document.getElementById('rsa-encrypt-btn');
+const rsaEncryptInput = document.getElementById('rsa-encrypt-input');
+const rsaEncryptKeyE = document.getElementById('rsa-encrypt-key-e');
+const rsaEncryptKeyN = document.getElementById('rsa-encrypt-key-n');
+const rsaEncryptResult = document.getElementById('rsa-encrypt-result');
+
+if (rsaEncryptBtn) {
+    rsaEncryptBtn.addEventListener('click', function() {
+        console.log('RSA encrypt clicked');
+        const text = rsaEncryptInput.value;
+        const e = rsaEncryptKeyE.value;
+        const n = rsaEncryptKeyN.value;
+        
+        if (!text) {
+            rsaEncryptResult.textContent = 'Please enter text to encrypt';
+            return;
+        }
+        if (!e || !n) {
+            rsaEncryptResult.textContent = 'Please enter public key (e) and modulus (n)';
+            return;
+        }
+        
+        const encrypted = rsaEncrypt(text, { e, n });
+        rsaEncryptResult.innerHTML = `
+            <div class="text-blue-600 font-bold mb-2">🔐 Encrypted Message:</div>
+            <div class="break-all">${encrypted}</div>
+        `;
+    });
+}
+
+// RSA Decryption
+const rsaDecryptBtn = document.getElementById('rsa-decrypt-btn');
+const rsaDecryptInput = document.getElementById('rsa-decrypt-input');
+const rsaDecryptKeyD = document.getElementById('rsa-decrypt-key-d');
+const rsaDecryptKeyN = document.getElementById('rsa-decrypt-key-n');
+const rsaDecryptResult = document.getElementById('rsa-decrypt-result');
+
+if (rsaDecryptBtn) {
+    rsaDecryptBtn.addEventListener('click', function() {
+        console.log('RSA decrypt clicked');
+        const ciphertext = rsaDecryptInput.value;
+        const d = rsaDecryptKeyD.value;
+        const n = rsaDecryptKeyN.value;
+        
+        if (!ciphertext) {
+            rsaDecryptResult.textContent = 'Please enter ciphertext';
+            return;
+        }
+        if (!d || !n) {
+            rsaDecryptResult.textContent = 'Please enter private key (d) and modulus (n)';
+            return;
+        }
+        
+        const decrypted = rsaDecrypt(ciphertext, { d, n });
+        rsaDecryptResult.innerHTML = `
+            <div class="text-green-600 font-bold mb-2">🔓 Decrypted Message:</div>
+            <div>${decrypted}</div>
+        `;
+    });
+}
+
+// Navigation active state
+const sections = document.querySelectorAll('[id]');
+const navLinks = document.querySelectorAll('.nav-link');
+
+window.addEventListener('scroll', () => {
+    let current = '';
+    
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+        if (scrollY >= sectionTop - 200) {
+            current = section.getAttribute('id');
+        }
+    });
+    
+    navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === `#${current}`) {
+            link.classList.add('active');
+        }
+    })
+}
+)
+
+})
+
+    </script>
+    <script type="module" src="./JAVASCRIPT/math.js"></script>
+
+
+</body>
